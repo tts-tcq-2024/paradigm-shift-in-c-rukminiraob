@@ -18,17 +18,17 @@ int chargeRateIsOk( float chargeRate) {
 
 
 int batteryIsOk(float temperature, float soc, float chargeRate) {
-  int t_ok = temperatureIsOk(temperature);
-  int s_ok = socIsOk(soc);
-  int c_ok = chargeRateIsOk(chargeRate);	
+	int t_ok = temperatureIsOk(temperature);
+  	int s_ok = socIsOk(soc);
+  	int c_ok = chargeRateIsOk(chargeRate);	
 
 	return ( (t_ok + s_ok + c_ok) == 3)
 }
 
 
 int main() {
-  assert(batteryIsOk(25, 70, 0.7));
-  assert(!batteryIsOk(50, 85, 0));
+	assert(batteryIsOk(25, 70, 0.7));
+  	assert(!batteryIsOk(50, 85, 0));
 }
 
 
