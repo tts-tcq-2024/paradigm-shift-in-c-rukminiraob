@@ -22,7 +22,7 @@ int batteryIsOk(float temperature, float soc, float chargeRate) {
   	int s_ok = socIsOk(soc);
   	int c_ok = chargeRateIsOk(chargeRate);	
 
-	return ( (t_ok + s_ok + c_ok) == 3)
+	return ( (t_ok + s_ok + c_ok) == 3);
 }
 
 
