@@ -5,14 +5,35 @@
 #define SOC_LOWER_LIMIT 20
 #define SOC_WARNING_TOLERANCE 4 // 5% of 80
 
-int socIsOk(float soc) {
+// Function to check if the SoC is out of range
+int isSocOutOfRange(float soc) {
     if (soc < SOC_LOWER_LIMIT) {
         printf("State of Charge out of range!\n");
-        return 0;
-    } else if (soc <= SOC_LOWER_LIMIT + SOC_WARNING_TOLERANCE) {
+        return 1;
+    }
+    return 0;
+}
+
+// Function to check if SoC is approaching discharge
+void checkSocLowerWarning(float soc) {
+    if (soc <= SOC_LOWER_LIMIT + SOC_WARNING_TOLERANCE) {
         printf("Warning: Approaching discharge limit!\n");
-    } else if (soc >= SOC_UPPER_LIMIT - SOC_WARNING_TOLERANCE) {
+    }
+}
+
+// Function to check if SoC is approaching charge-peak
+void checkSocUpperWarning(float soc) {
+    if (soc >= SOC_UPPER_LIMIT - SOC_WARNING_TOLERANCE) {
         printf("Warning: Approaching charge-peak!\n");
     }
-    return (soc <= SOC_UPPER_LIMIT);
+}
+
+// Main function that integrates all checks
+int socIsOk(float soc) {
+    if (isSocOutOfRange(soc)) {
+        return 0;
+    }
+    checkSocLowerWarning(soc);
+    checkSocUpperWarning(soc);
+    return soc <= SOC_UPPER_LIMIT;
 }
